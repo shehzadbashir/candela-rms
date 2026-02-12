@@ -1,0 +1,14 @@
+# Create backup
+docker exec candela_backend npm run backup
+
+# Restore backup
+docker exec candela_backend npm run restore
+
+# Access database
+docker exec -it candela_postgres psql -U postgres -d candela_rms
+
+# Run migrations
+docker exec candela_backend npx prisma migrate deploy
+
+# Reset database
+docker exec candela_backend npx prisma migrate reset --force

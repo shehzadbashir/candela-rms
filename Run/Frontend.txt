@@ -1,0 +1,15 @@
+# Navigate to frontend
+cd frontend
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env.local
+
+# Edit .env.local
+nano .env.local
+# Set NEXT_PUBLIC_API_URL=http://localhost:5000/api
+
+# Start frontend
+npm run dev

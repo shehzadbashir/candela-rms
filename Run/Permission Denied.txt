@@ -1,0 +1,6 @@
+# Linux/Mac - fix permissions
+sudo chown -R $USER:$USER .
+chmod +x scripts/*.sh
+
+# Windows - run PowerShell as Administrator
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned

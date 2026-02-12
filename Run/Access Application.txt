@@ -1,0 +1,30 @@
+📱 ACCESSING THE APPLICATION
+Web Interface
+URL: http://localhost
+
+Admin: admin@candelarms.com / admin123
+
+Manager: manager@candelarms.com / admin123
+
+Cashier: cashier@candelarms.com / admin123
+
+API Endpoints
+Base URL: http://localhost:5000/api
+
+Documentation: http://localhost:5000/api-docs
+
+Health Check: http://localhost:5000/health
+
+Database Access
+Host: localhost:5432
+
+Database: candela_rms
+
+Username: postgres
+
+Password: [from .env file]
+
+Redis Access
+Host: localhost:6379
+
+Password: [from .env file]

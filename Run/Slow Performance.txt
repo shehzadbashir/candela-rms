@@ -1,0 +1,12 @@
+# Check resource usage
+docker stats
+
+# Increase resources in docker-compose.yml
+services:
+  backend:
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G

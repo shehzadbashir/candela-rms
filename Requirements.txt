@@ -1,0 +1,6 @@
+# Check if you have required software
+node --version     # Need v18+
+npm --version      # Need v9+
+docker --version   # Need v24+
+docker-compose --version  # Need v2.20+
+git --version      # Need v2.40+

@@ -1,0 +1,11 @@
+# Check if database is running
+docker ps | grep postgres
+
+# Check database logs
+docker-compose logs postgres
+
+# Reset database
+docker-compose down -v
+docker-compose up -d postgres
+sleep 10
+docker exec candela_backend npx prisma migrate deploy

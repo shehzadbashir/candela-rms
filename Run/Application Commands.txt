@@ -1,0 +1,11 @@
+# Access backend container
+docker exec -it candela_backend sh
+
+# Access frontend container
+docker exec -it candela_frontend sh
+
+# View database size
+docker exec candela_postgres psql -U postgres -d candela_rms -c "SELECT pg_database_size('candela_rms')/1024/1024 as size_mb;"
+
+# Check system health
+curl http://localhost:5000/health

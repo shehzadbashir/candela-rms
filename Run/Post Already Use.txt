@@ -1,0 +1,7 @@
+# Check what's using port 80
+sudo lsof -i :80  # Linux/Mac
+netstat -ano | findstr :80  # Windows
+
+# Change ports in .env file
+sed -i 's/80:80/8080:80/' docker-compose.yml
+sed -i 's/3000:3000/3001:3000/' docker-compose.yml

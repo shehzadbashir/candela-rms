@@ -1,0 +1,2 @@
+chmod +x run-docker.sh
+./run-docker.sh

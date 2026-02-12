@@ -1,0 +1,25 @@
+# 1. Check if containers are running
+docker ps
+
+# Expected output (5 containers):
+# - candela_postgres
+# - candela_redis  
+# - candela_backend
+# - candela_frontend
+# - candela_nginx
+
+# 2. Test API
+curl http://localhost:5000/health
+
+# Expected response:
+# {"status":"OK","timestamp":"2024-..."}
+
+# 3. Test Frontend
+curl http://localhost
+
+# Should return HTML
+
+# 4. Test Database
+docker exec candela_postgres psql -U postgres -d candela_rms -c "SELECT COUNT(*) FROM users;"
+
+# Should return count of users

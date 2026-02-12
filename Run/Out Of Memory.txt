@@ -1,0 +1,6 @@
+# Limit Docker memory usage
+echo '{
+  "memory": 2048,
+  "memory-swap": 4096
+}' | sudo tee /etc/docker/daemon.json
+sudo systemctl restart docker
