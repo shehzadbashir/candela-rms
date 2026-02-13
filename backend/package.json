@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "lint": "eslint src/",
     "dev": "nodemon server.js",
     "prod": "NODE_ENV=production node server.js",
     "prisma:generate": "prisma generate",

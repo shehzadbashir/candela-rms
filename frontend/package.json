@@ -5,6 +5,7 @@
   "description": "Candela Retail Management System - Frontend",
   "scripts": {
     "dev": "next dev",
+    "lint": "next lint",
     "build": "next build",
     "start": "next start",
     "prod": "NODE_ENV=production next start",
