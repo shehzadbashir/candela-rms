@@ -99,10 +99,10 @@ export default function ProductsPage() {
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries('products');
-        toast.success(t('products.importSuccess', { count: data.imported }));
-        if (data.errors.length > 0) {
-          console.warn('Import errors:', data.errors);
-        }
+        toast.success(t('products.importSuccess', { count: data.data?.imported || 0 }));
+        if (data.data?.errors?.length > 0) {
+  console.warn('Import errors:', data.data.errors);
+}
       },
       onError: (error: any) => {
         toast.error(error.response?.data?.error || t('products.importError'));
@@ -307,24 +307,24 @@ export default function ProductsPage() {
 
     return (
       <div className="flex space-x-2">
-        {lowStock?.length > 0 && (
-          <button
-            onClick={() => handleFilterChange('lowStock', true)}
-            className="flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full hover:bg-red-200"
-          >
-            <HiOutlineExclamation className="h-4 w-4 mr-1" />
-            {t('products.lowStockCount', { count: lowStock.length })}
-          </button>
-        )}
-        {expiring?.length > 0 && (
-          <button
-            onClick={() => handleFilterChange('expiring', true)}
-            className="flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full hover:bg-yellow-200"
-          >
-            <HiOutlineClock className="h-4 w-4 mr-1" />
-            {t('products.expiringCount', { count: expiring.length })}
-          </button>
-        )}
+        {lowStock?.data?.length > 0 && (
+  <button
+    onClick={() => handleFilterChange('lowStock', true)}
+    className="flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full hover:bg-red-200"
+  >
+    <HiOutlineExclamation className="h-4 w-4 mr-1" />
+    {t('products.lowStockCount', { count: lowStock?.data?.length || 0 })}
+  </button>
+)}
+{expiring?.data?.length > 0 && (
+  <button
+    onClick={() => handleFilterChange('expiring', true)}
+    className="flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full hover:bg-yellow-200"
+  >
+    <HiOutlineClock className="h-4 w-4 mr-1" />
+    {t('products.expiringCount', { count: expiring?.data?.length || 0 })}
+  </button>
+)}
       </div>
     );
   };
@@ -447,7 +447,7 @@ export default function ProductsPage() {
               </span>
               {filters.categoryId && (
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                  {t('products.category')}: {categories?.find(c => c.id === filters.categoryId)?.name}
+                  {t('products.category')}: {categories?.data?.find((c: any) => c.id === filters.categoryId)?.name}
                   <button
                     onClick={() => handleFilterChange('categoryId', '')}
                     className="ml-1 hover:text-blue-900"
@@ -458,7 +458,7 @@ export default function ProductsPage() {
               )}
               {filters.brandId && (
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                  {t('products.brand')}: {brands?.find(b => b.id === filters.brandId)?.name}
+                  {t('products.brand')}: {brands?.data?.find((b: any) => b.id === filters.brandId)?.name}
                   <button
                     onClick={() => handleFilterChange('brandId', '')}
                     className="ml-1 hover:text-blue-900"
@@ -511,7 +511,7 @@ export default function ProductsPage() {
           columns={columns}
           data={productsData?.data || []}
           loading={isLoading}
-          pagination={productsData?.pagination}
+          pagination={productsData?.data?.pagination}
           onPageChange={handlePageChange}
           emptyMessage={t('products.noProducts')}
         />
@@ -523,7 +523,7 @@ export default function ProductsPage() {
               {t('products.totalProducts')}
             </div>
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
-              {productsData?.pagination?.total || 0}
+              {productsData?.data?.pagination?.total || 0}
             </div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
@@ -531,7 +531,7 @@ export default function ProductsPage() {
               {t('products.totalCategories')}
             </div>
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
-              {categories?.length || 0}
+              {categories?.data?.length || 0}
             </div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
@@ -539,7 +539,7 @@ export default function ProductsPage() {
               {t('products.totalBrands')}
             </div>
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
-              {brands?.length || 0}
+              {brands?.data?.length || 0}
             </div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
@@ -547,7 +547,7 @@ export default function ProductsPage() {
               {t('products.totalUnits')}
             </div>
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
-              {units?.length || 0}
+              {units?.data?.length || 0}
             </div>
           </div>
         </div>
@@ -625,7 +625,7 @@ export default function ProductsPage() {
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
               >
                 <option value="">{t('common.all')}</option>
-                {categories?.map((category: any) => (
+                {categories?.data?.map((category: any) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
@@ -642,7 +642,7 @@ export default function ProductsPage() {
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
               >
                 <option value="">{t('common.all')}</option>
-                {brands?.map((brand: any) => (
+                {brands?.data?.map((brand: any) => (
                   <option key={brand.id} value={brand.id}>
                     {brand.name}
                   </option>
@@ -699,7 +699,7 @@ export default function ProductsPage() {
   );
 }
 
-export async getStaticProps({ locale }: { locale: string }) {
+export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),

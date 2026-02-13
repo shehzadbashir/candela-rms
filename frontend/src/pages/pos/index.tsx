@@ -37,7 +37,7 @@ export default function POS() {
   const createSaleMutation = useMutation(posAPI.createSale, {
     onSuccess: (data) => {
       toast.success(t('pos.saleComplete'));
-      handlePrintReceipt(data.id);
+      handlePrintReceipt(data.data?.id);
       setCart([]);
       setShowPayment(false);
     },

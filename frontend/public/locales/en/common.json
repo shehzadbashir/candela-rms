@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "actions": "Actions",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "products": {
+    "title": "Products",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product",
+    "deleteProduct": "Delete Product",
+    "sku": "SKU",
+    "name": "Name",
+    "barcode": "Barcode",
+    "category": "Category",
+    "brand": "Brand",
+    "price": "Price",
+    "cost": "Cost",
+    "stock": "Stock",
+    "lowStock": "Low Stock",
+    "expiry": "Expiry Date"
+  },
+  "grn": {
+    "title": "Goods Received Notes",
+    "newGRN": "New GRN",
+    "grnNumber": "GRN Number",
+    "supplier": "Supplier",
+    "receivedDate": "Received Date",
+    "totalAmount": "Total Amount",
+    "status": "Status"
+  },
+  "dashboard": {
+    "totalRevenue": "Total Revenue",
+    "totalSales": "Total Sales",
+    "totalCustomers": "Total Customers",
+    "lowStock": "Low Stock Items",
+    "salesTrend": "Sales Trend",
+    "topProducts": "Top Products",
+    "salesByCategory": "Sales by Category",
+    "recentSales": "Recent Sales"
+  },
+  "pos": {
+    "title": "Point of Sale",
+    "scanBarcode": "Scan Barcode or Search",
+    "cart": "Shopping Cart",
+    "checkout": "Checkout",
+    "payment": "Payment",
+    "cash": "Cash",
+    "card": "Card",
+    "mobilePayment": "Mobile Payment"
+  }
+}

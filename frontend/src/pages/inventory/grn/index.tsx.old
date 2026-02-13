@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Layout from '@/components/Layout';
+import DataTable from '@/components/Common/DataTable';
+import { grnAPI } from '@/services/api';
+import { HiPlus } from 'react-icons/hi';
+import { GrnResponse } from "@/types/grn";
+import { AxiosResponse } from "axios";
+import { useQuery } from "@tanstack/react-query";
+
+// Example fetch function (adjust URL)
+const fetchGrns = async (): Promise<AxiosResponse<GrnResponse>> => {
+  return axios.get("/api/grns");
+};
+
+export default function GrnTable() {
+  const { data: grns, isLoading } = useQuery<AxiosResponse<GrnResponse>>(
+    ["grns"],
+    fetchGrns
+  );
+
+  return (
+    <Table
+      data={grns?.data.data || []}        // actual GRN items
+      loading={isLoading}
+      pagination={grns?.data.pagination}  // pagination info
+    />
+  );
+}
+
+export default function GRNPage() {
+  const { t } = useTranslation('common');
+  const [filters, setFilters] = useState({ page: 1, limit: 20 });
+  const { data: grns, isLoading } = useQuery(
+    ['grns', filters],
+    () =
+  );
+
+  const columns = [
+    { key: 'grnNumber', title: 'GRN Number' },
+    { key: 'receivedDate', title: 'Date' },
+    { key: 'totalAmount', title: 'Amount' },
+  ];
+
+  return (
+    <Layout>
+      <div className="p-6">
+        <h1 className="text-2xl font-bold mb-4">{t('grn.title')}</h1>
+        <DataTable
+          columns={columns}
+          loading={isLoading}
+          pagination={grns?.data?.pagination}
+          onPageChange={(page) = ...filters, page })} 
+        />
+      </div>
+    </Layout>
+  );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+} 

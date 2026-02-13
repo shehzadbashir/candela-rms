@@ -275,7 +275,7 @@ export default function BackupPage() {
           </h2>
           <DataTable
             columns={columns}
-            data={backups || []}
+            data={backups?.data || []}
             loading={isLoading}
           />
         </div>
@@ -291,7 +291,7 @@ export default function BackupPage() {
                 {t('backup.totalBackups')}
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                {backups?.length || 0}
+                {backups?.data?.length || 0}
               </div>
             </div>
             <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -299,7 +299,7 @@ export default function BackupPage() {
                 {t('backup.latestBackup')}
               </div>
               <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                {backups?.[0] ? format(new Date(backups[0].createdAt), 'dd/MM/yyyy HH:mm') : '-'}
+                {backups?.data?.[0] ? format(new Date(backups.data[0].createdAt), 'dd/MM/yyyy HH:mm') : '-'}
               </div>
             </div>
             <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -307,10 +307,10 @@ export default function BackupPage() {
                 {t('backup.totalSize')}
               </div>
               <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                {backups?.reduce((total, b) => {
-                  const size = parseFloat(b.fileSize);
-                  return total + (isNaN(size) ? 0 : size);
-                }, 0).toFixed(2)} MB
+                {backups?.data?.reduce((total: number, b: any) => {
+  const size = parseFloat(b.fileSize);
+  return total + (isNaN(size) ? 0 : size);
+}, 0).toFixed(2)} MB
               </div>
             </div>
             <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -318,9 +318,9 @@ export default function BackupPage() {
                 {t('backup.lastRestore')}
               </div>
               <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                {backups?.find(b => b.restoredAt) 
-                  ? format(new Date(backups.find(b => b.restoredAt).restoredAt), 'dd/MM/yyyy HH:mm')
-                  : '-'
+               {backups?.data?.find((b: any) => b.restoredAt) 
+  ? format(new Date(backups.data.find((b: any) => b.restoredAt).restoredAt), 'dd/MM/yyyy HH:mm')
+  : '-'
                 }
               </div>
             </div>
@@ -344,7 +344,7 @@ export default function BackupPage() {
   );
 }
 
-export async getStaticProps({ locale }: { locale: string }) {
+export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),

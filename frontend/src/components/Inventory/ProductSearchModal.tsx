@@ -31,7 +31,6 @@ export default function ProductSearchModal({
     }
   );
 
-  // Focus search input when modal opens
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -42,32 +41,28 @@ export default function ProductSearchModal({
     }
   }, [isOpen]);
 
-  // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
 
       if (e.key === 'Escape') {
         onClose();
-      } else if (e.key === 'Enter' && products?.length > 0) {
-        onSelect(products[0]);
+      } else if (e.key === 'Enter' && products?.data?.length > 0) {
+        onSelect(products?.data?.[0]);
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
-        // Navigate down
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        // Navigate up
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, products, onSelect]);
+  }, [isOpen, products, onSelect, onClose]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={t('product.search')} size="lg">
       <div className="space-y-4">
-        {/* Search Input */}
         <div className="relative">
           <input
             ref={searchInputRef}
@@ -88,20 +83,18 @@ export default function ProductSearchModal({
           )}
         </div>
 
-        {/* Quick Search Hint */}
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {t('product.searchHint')}
         </div>
 
-        {/* Results */}
         <div className="max-h-96 overflow-y-auto">
           {isLoading ? (
             <div className="flex justify-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
             </div>
-          ) : products?.length > 0 ? (
+          ) : products?.data?.length > 0 ? (
             <div className="grid grid-cols-1 gap-2">
-              {products.map((product: any) => (
+              {products?.data?.map((product: any) => (
                 <button
                   key={product.id}
                   onClick={() => {
@@ -110,7 +103,6 @@ export default function ProductSearchModal({
                   }}
                   className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors text-left"
                 >
-                  {/* Product Image */}
                   <div className="flex-shrink-0 w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
                     {product.imageUrl ? (
                       <img
@@ -125,7 +117,6 @@ export default function ProductSearchModal({
                     )}
                   </div>
 
-                  {/* Product Info */}
                   <div className="flex-1 ml-3">
                     <div className="flex justify-between items-start">
                       <div>
@@ -153,7 +144,6 @@ export default function ProductSearchModal({
                       </div>
                     </div>
 
-                    {/* Stock Status */}
                     {product.availableStock <= product.minStock && (
                       <div className="mt-2">
                         <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">
@@ -176,7 +166,6 @@ export default function ProductSearchModal({
           )}
         </div>
 
-        {/* Footer */}
         <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
           <div className="text-sm text-gray-500 dark:text-gray-400">
             {t('product.shortcuts')}: F1 - {t('product.search')}, ↑↓ - {t('product.navigate')}, Enter - {t('product.select')}

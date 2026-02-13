@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { useTranslation } from 'next-i18next';
-import { 
-  HiCurrencyDollar, 
-  HiShoppingCart, 
-  HiUsers, 
-  HiCube 
+import {
+  HiCurrencyDollar,
+  HiShoppingCart,
+  HiUsers,
+  HiCube
 } from 'react-icons/hi';
 import {
   LineChart,
@@ -29,7 +29,7 @@ const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
 export default function Dashboard() {
   const { t } = useTranslation('common');
-  
+
   const { data: stats, isLoading } = useQuery(
     'dashboardStats',
     dashboardAPI.getStats
@@ -54,28 +54,28 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title={t('dashboard.totalRevenue')}
-          value={`Rs. ${stats?.totalRevenue?.toLocaleString() || '0'}`}
+          value={`Rs. ${stats?.data?.totalRevenue?.toLocaleString() || '0'}`}
           icon={HiCurrencyDollar}
           trend={+12.5}
           color="blue"
         />
         <StatCard
           title={t('dashboard.totalSales')}
-          value={stats?.totalSales?.toLocaleString() || '0'}
+          value={stats?.data?.totalSales?.toLocaleString() || '0'}
           icon={HiShoppingCart}
           trend={+8.2}
           color="green"
         />
         <StatCard
           title={t('dashboard.totalCustomers')}
-          value={stats?.totalCustomers?.toLocaleString() || '0'}
+          value={stats?.data?.totalCustomers?.toLocaleString() || '0'}
           icon={HiUsers}
           trend={+15.3}
           color="purple"
         />
         <StatCard
           title={t('dashboard.lowStock')}
-          value={stats?.lowStockItems?.toLocaleString() || '0'}
+          value={stats?.data?.lowStockItems?.toLocaleString() || '0'}
           icon={HiCube}
           trend={-5.1}
           color="red"
@@ -91,17 +91,17 @@ export default function Dashboard() {
           </h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={salesData?.daily || []}>
+              <AreaChart data={salesData?.data?.daily || []}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
-                <Area 
-                  type="monotone" 
-                  dataKey="revenue" 
-                  stroke="#3b82f6" 
-                  fill="#3b82f6" 
-                  fillOpacity={0.1} 
+                <Area
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#3b82f6"
+                  fill="#3b82f6"
+                  fillOpacity={0.1}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -115,7 +115,7 @@ export default function Dashboard() {
           </h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={stats?.topProducts || []}>
+              <BarChart data={stats?.data?.topProducts || []}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
@@ -135,7 +135,7 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={stats?.categorySales || []}
+                  data={stats?.data?.categorySales || []}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
@@ -144,7 +144,7 @@ export default function Dashboard() {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {stats?.categorySales?.map((entry: any, index: number) => (
+                  {stats?.data?.categorySales?.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -178,7 +178,7 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {stats?.recentSales?.map((sale: any) => (
+                {stats?.data?.recentSales?.map((sale: any) => (
                   <tr key={sale.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                       {sale.invoiceNumber}

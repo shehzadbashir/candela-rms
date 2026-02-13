@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { grnAPI, suppliersAPI, productsAPI } from '@/services/api';
 import { HiPlus, HiTrash, HiSearch } from 'react-icons/hi';
 import toast from 'react-hot-toast';
-import ProductSearchModal from './ProductSearchModal';
+import ProductSearchModal from '@/components/Inventory/ProductSearchModal';
 
 interface GRNFormProps {
   onSuccess: () => void;
@@ -110,7 +110,7 @@ export default function GRNForm({ onSuccess, onCancel, initialData }: GRNFormPro
   };
 
   const handlePOSelect = (poId: string) => {
-    const po = purchaseOrders?.find((p: any) => p.id === poId);
+    const po = purchaseOrders?.data?.find((p: any) => p.id === poId);
     if (po) {
       setValue('supplierId', po.supplierId);
       
@@ -175,14 +175,14 @@ export default function GRNForm({ onSuccess, onCancel, initialData }: GRNFormPro
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
             >
               <option value="">{t('common.select')}</option>
-              {suppliers?.map((supplier: any) => (
+              {suppliers?.data?.map((supplier: any) => (
                 <option key={supplier.id} value={supplier.id}>
                   {supplier.name}
                 </option>
               ))}
             </select>
             {errors.supplierId && (
-              <p className="mt-1 text-sm text-red-600">{errors.supplierId.message}</p>
+              <p className="mt-1 text-sm text-red-600">{errors.supplierId?.message?.toString() || ''}</p>
             )}
           </div>
 
@@ -196,7 +196,7 @@ export default function GRNForm({ onSuccess, onCancel, initialData }: GRNFormPro
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
             >
               <option value="">{t('common.select')}</option>
-              {purchaseOrders?.map((po: any) => (
+              {purchaseOrders?.data?.map((po: any) => (
                 <option key={po.id} value={po.id}>
                   {po.poNumber} - {po.supplier.name} (Pending: {po.totalPending})
                 </option>

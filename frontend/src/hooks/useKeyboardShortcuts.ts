@@ -25,48 +25,51 @@ interface ShortcutHandlers {
 export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Prevent default for function keys
-      if (e.key.startsWith('F') && handlers[`on${e.key}` as keyof ShortcutHandlers]) {
+      // Function keys (F1-F12)
+      if (e.key.startsWith('F')) {
         e.preventDefault();
-        handlers[`on${e.key}` as keyof ShortcutHandlers]?.();
+        const key = e.key as string;
+        const handlerKey = `on${key}` as keyof ShortcutHandlers;
+        const handler = handlers[handlerKey];
+        if (handler) {
+          handler();
+        }
       }
 
-      // Ctrl + S
-      if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-        handlers.onCtrlS?.();
+      // Ctrl combinations
+      if (e.ctrlKey) {
+        switch (e.key) {
+          case 's':
+            e.preventDefault();
+            handlers.onCtrlS?.();
+            break;
+          case 'p':
+            e.preventDefault();
+            handlers.onCtrlP?.();
+            break;
+          case 'n':
+            e.preventDefault();
+            handlers.onCtrlN?.();
+            break;
+        }
       }
 
-      // Ctrl + P
-      if (e.ctrlKey && e.key === 'p') {
-        e.preventDefault();
-        handlers.onCtrlP?.();
-      }
-
-      // Ctrl + N
-      if (e.ctrlKey && e.key === 'n') {
-        e.preventDefault();
-        handlers.onCtrlN?.();
-      }
-
-      // Escape
-      if (e.key === 'Escape') {
-        handlers.onEscape?.();
-      }
-
-      // Enter
-      if (e.key === 'Enter') {
-        handlers.onEnter?.();
-      }
-
-      // Plus key
-      if (e.key === '+' || e.key === '=') {
-        handlers.onPlus?.();
-      }
-
-      // Minus key
-      if (e.key === '-' || e.key === '_') {
-        handlers.onMinus?.();
+      // Other keys
+      switch (e.key) {
+        case 'Escape':
+          handlers.onEscape?.();
+          break;
+        case 'Enter':
+          handlers.onEnter?.();
+          break;
+        case '+':
+        case '=':
+          handlers.onPlus?.();
+          break;
+        case '-':
+        case '_':
+          handlers.onMinus?.();
+          break;
       }
     };
 

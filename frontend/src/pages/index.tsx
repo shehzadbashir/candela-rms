@@ -6,7 +6,7 @@ import Dashboard from '@/components/Dashboard';
 
 export default function Home() {
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, loading: isLoading } = useAuth();
 
   useEffect(() => {
     if (!isLoading && !user) {
