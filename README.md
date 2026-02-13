@@ -34,4 +34,4 @@ A complete, production-ready Retail Management System with multi-store support, 
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/candela-rms.git
-cd candela-rms
+cd candela-rms[![GitHub](https://img.shields.io/github/license/shehzadbashir/candela-rms)] 
