@@ -3,7 +3,7 @@ import { useQuery, useMutation } from 'react-query';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from '@/components/Layout';
-import { posAPI, productsAPI } from '@/services/api';
+import { posAPI, productsAPI } from '../../services/api';
 import { HiSearch, HiX, HiPrinter, HiCash, HiCreditCard } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 import BarcodeScanner from '@/components/POS/BarcodeScanner';

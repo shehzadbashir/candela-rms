@@ -3,7 +3,7 @@ import { useQuery, useMutation } from 'react-query';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from '@/components/Layout';
-import { backupAPI } from '@/services/api';
+import { backupAPI } from '../../services/api';
 import DataTable from '@/components/Common/DataTable';
 import { HiDownload, HiUpload, HiTrash, HiRefresh } from 'react-icons/hi';
 import toast from 'react-hot-toast';

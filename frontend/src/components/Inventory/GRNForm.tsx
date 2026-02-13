@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useQuery, useMutation } from 'react-query';
 import { useTranslation } from 'next-i18next';
-import { grnAPI, suppliersAPI, productsAPI } from '@/services/api';
+import { grnAPI, suppliersAPI, productsAPI } from '../../services/api';
 import { HiPlus, HiTrash, HiSearch } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 import ProductSearchModal from './ProductSearchModal';

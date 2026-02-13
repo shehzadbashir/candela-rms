@@ -7,7 +7,7 @@ import DataTable from '@/components/Common/DataTable';
 import Modal from '@/components/Common/Modal';
 import ProductForm from '@/components/Inventory/ProductForm';
 import ProductSearchModal from '@/components/Inventory/ProductSearchModal';
-import { productsAPI, categoriesAPI, brandsAPI, unitsAPI } from '@/services/api';
+import { productsAPI, categoriesAPI, brandsAPI, unitsAPI } from '../../services/api';
 import { 
   HiPlus, 
   HiDownload, 

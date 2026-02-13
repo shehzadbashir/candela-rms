@@ -22,7 +22,7 @@ import {
   Pie,
   Cell
 } from 'recharts';
-import { dashboardAPI } from '@/services/api';
+import { dashboardAPI } from '../../services/api';
 import StatCard from './StatCard';
 
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];

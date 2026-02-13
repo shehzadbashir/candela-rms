@@ -3,7 +3,7 @@ import { useQuery, useMutation } from 'react-query';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from '@/components/Layout';
-import { grnAPI, suppliersAPI, productsAPI } from '@/services/api';
+import { grnAPI, suppliersAPI, productsAPI } from '../../../services/api';
 import DataTable from '@/components/Common/DataTable';
 import Modal from '@/components/Common/Modal';
 import GRNForm from '@/components/Inventory/GRNForm';
